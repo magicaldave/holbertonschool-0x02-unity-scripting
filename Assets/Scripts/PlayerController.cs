@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -28,20 +26,16 @@ public class PlayerController : MonoBehaviour
 			    velocity += direction * speed * Time.deltaTime;
 			    // Speed limit!
 			    velocity = Vector3.ClampMagnitude(velocity, 20.0f);
-			    // Debug.Log("You should be moving!");
 		    }
 		    else
 		    {
-			    Debug.Log("About to decelerate! " + velocity);
 			    // Deceleration is still ongoing.
 			    velocity = velocity.normalized * friction * Time.deltaTime;
-			    Debug.Log("Slowed down: " + velocity);
 			    if (velocity.magnitude < 0.1f)
 			    {
 				    velocity = Vector3.zero;
 			    }
 		    }
-		    Debug.Log("Sorry, I don't know why I'm still moving. " + velocity + Time.deltaTime + (velocity * Time.deltaTime) + direction.magnitude);
 		    transform.position += velocity * Time.deltaTime;
 	    }
 }
