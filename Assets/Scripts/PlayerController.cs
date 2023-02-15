@@ -4,11 +4,10 @@ public class PlayerController : MonoBehaviour
 {
 	    public float speed = 3.0f;
 	    public float friction = 17.5f;
-	    public GameObject player;
-	    public Rigidbody m_Rigidbody;
 	    // This vector is used to store the player's actual velocity
 	    private Vector3 velocity = Vector3.zero;
 	    private int score = 0;
+	    private int health = 5;
 
 	    // Update is called once per frame
 	    void Update()
@@ -54,8 +53,19 @@ public class PlayerController : MonoBehaviour
 		    if (other.gameObject.CompareTag("Pickup"))
 		    {
 			    Destroy(other.gameObject);
-			    Debug.Log("Score: " + score);
 			    score += 1;
+			    Debug.Log("Score: " + score);
+		    }
+		    if (other.gameObject.CompareTag("Trap"))
+		    {
+			    health -= 1;
+			    if (health == 0)
+			    {
+				    // This kinda does it but generates hundreds of errors per second, so we're removing destruction for now
+				    Debug.Log("You Died!");
+				    // Destroy(gameObject);
+			    }
+			    Debug.Log("Health: " + health);
 		    }
 	    }
 }
