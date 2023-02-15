@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
 			    health = score = 0;
 			    SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
 		    }
-		    Debug.Log("Accelerometer input: " + Input.acceleration);
+		    // Debug.Log("Accelerometer input: " + Input.acceleration);
 		    transform.position += new Vector3(Input.acceleration.x, 0, 0);
 
     }
