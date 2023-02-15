@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -44,6 +45,14 @@ public class PlayerController : MonoBehaviour
 			    Debug.Log("All Coins Collected!");
 			    score = 0;
 		    }
+		    if (health == 0)
+		    {
+			    Debug.Log("Game Over!");
+			    health = score = 0;
+			    SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+		    }
+		    Debug.Log("Accelerometer input: " + Input.acceleration);
+		    transform.position += new Vector3(Input.acceleration.x, 0, 0);
 
     }
 	    void OnTriggerEnter(Collider other)
@@ -59,12 +68,6 @@ public class PlayerController : MonoBehaviour
 		    if (other.gameObject.CompareTag("Trap"))
 		    {
 			    health -= 1;
-			    if (health == 0)
-			    {
-				    // This kinda does it but generates hundreds of errors per second, so we're removing destruction for now
-				    Debug.Log("You Died!");
-				    // Destroy(gameObject);
-			    }
 			    Debug.Log("Health: " + health);
 		    }
 		    if (other.gameObject.CompareTag("Goal"))
